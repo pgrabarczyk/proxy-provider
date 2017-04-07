@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] %logger{50}.%M:%line - %msg%n</Pattern>
+		</encoder>
+	</appender>
+
+    <logger name="com.pgrabarczyk.proxy.provider" level="debug" additivity="false">
+        <appender-ref ref="console"/>
+    </logger>
+    
+    <logger name="com.gargoylesoftware.htmlunit" level="OFF" additivity="false">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="console"/>
+    </root>
+    
+</configuration>
