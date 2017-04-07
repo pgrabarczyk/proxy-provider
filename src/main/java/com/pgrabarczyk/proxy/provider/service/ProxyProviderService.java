@@ -41,13 +41,13 @@ public class ProxyProviderService {
 	 * @throws WebpageContentServiceException
 	 */
 	public Set<ProvidedProxy> getProxies() throws WebpageContentServiceException {
-
+		log.debug("Searching for proxies");
 		Set<ProvidedProxy> result = new HashSet<>();
 
 		for (String url : urlsToParse) {
 			result.addAll(getProxies(url));
 		}
-
+		log.debug("Found {} proxies", result.size());
 		return result;
 	}
 

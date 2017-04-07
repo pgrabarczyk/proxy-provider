@@ -15,17 +15,15 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.pgrabarczyk.proxy.provider.service.exception.WebpageContentServiceException;
 
 import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
 public class WebpageContentService {
 
 	@Value("${com.pgrabarczyk.proxy.provider.web.page.content.wait.milliseconds}")
 	private long timeoutMillis = 30 * 1000;
 
-	public HtmlPage getPageContent(@NonNull String endPointUrl, @NonNull Map<String, String> headers, Set<Cookie> cookies)
-			throws WebpageContentServiceException {
+	public HtmlPage getPageContent(@NonNull String endPointUrl, @NonNull Map<String, String> headers,
+			Set<Cookie> cookies) throws WebpageContentServiceException {
 
 		try {
 			return getPage(endPointUrl, headers, cookies);

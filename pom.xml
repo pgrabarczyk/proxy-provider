@@ -5,7 +5,7 @@
 
 	<groupId>com.pgrabarczyk</groupId>
 	<artifactId>proxy-provider</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<name>proxy-provider</name>
 	<description>Provider of proxy</description>
