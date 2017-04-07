@@ -22,10 +22,10 @@ public class UpdatedProxyProviderService {
 
 	private Set<ProvidedProxy> proxies;
 
-	private LocalDateTime lastDownloaded;
+	private LocalDateTime lastDownloaded = LocalDateTime.of(1970, 1, 1, 1, 1);
 
 	public synchronized Set<ProvidedProxy> getProxies() throws WebpageContentServiceException {
-		if (null == lastDownloaded || null == proxies) {
+		if (null == proxies) {
 			updateProxies();
 			return proxies;
 		}
@@ -42,7 +42,7 @@ public class UpdatedProxyProviderService {
 		proxies = proxyProviderService.getProxies();
 		lastDownloaded = LocalDateTime.now();
 	}
-	
+
 	public synchronized boolean shouldBeUpdated() {
 		LocalDateTime dateTimeMillisAgo = LocalDateTime.now().minus(refreshDelayInMilliseconds, ChronoUnit.MILLIS);
 		return dateTimeMillisAgo.isBefore(dateTimeMillisAgo);
