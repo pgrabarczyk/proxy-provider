@@ -45,7 +45,7 @@ public class UpdatedProxyProviderService {
 
 	public synchronized boolean shouldBeUpdated() {
 		LocalDateTime dateTimeMillisAgo = LocalDateTime.now().minus(refreshDelayInMilliseconds, ChronoUnit.MILLIS);
-		return dateTimeMillisAgo.isBefore(dateTimeMillisAgo);
+		return dateTimeMillisAgo.isAfter(lastDownloaded);
 	}
 
 }
