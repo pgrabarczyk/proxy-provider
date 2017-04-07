@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pgrabarczyk.proxy.provider.AppConf;
 import com.pgrabarczyk.proxy.provider.model.ProvidedProxy;
-import com.pgrabarczyk.proxy.provider.service.exception.WebpageContentServiceException;
+import com.pgrabarczyk.proxy.provider.service.exception.DownloadWebPageServiceException;
 
 @ContextConfiguration(classes = AppConf.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,7 +31,7 @@ public class ProxyProviderServiceIT {
 	}
 
 	@Test
-	public void getProxiesTest() throws WebpageContentServiceException {
+	public void getProxiesTest() throws DownloadWebPageServiceException {
 		// given
 		// when
 		final Set<ProvidedProxy> proxies = proxyProviderService.getProxies();

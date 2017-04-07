@@ -12,23 +12,23 @@ import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
-import com.pgrabarczyk.proxy.provider.service.exception.WebpageContentServiceException;
+import com.pgrabarczyk.proxy.provider.service.exception.DownloadWebPageServiceException;
 
 import lombok.NonNull;
 
 @Service
-public class WebpageContentService {
+public class DownloadWebPageService {
 
 	@Value("${com.pgrabarczyk.proxy.provider.web.page.content.wait.milliseconds}")
 	private long timeoutMillis = 30 * 1000;
 
 	public HtmlPage getPageContent(@NonNull String endPointUrl, @NonNull Map<String, String> headers,
-			Set<Cookie> cookies) throws WebpageContentServiceException {
+			Set<Cookie> cookies) throws DownloadWebPageServiceException {
 
 		try {
 			return getPage(endPointUrl, headers, cookies);
 		} catch (FailingHttpStatusCodeException | IOException e) {
-			throw new WebpageContentServiceException(e);
+			throw new DownloadWebPageServiceException(e);
 		}
 
 	}

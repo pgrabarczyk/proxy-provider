@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.pgrabarczyk.proxy.provider.model.ProvidedProxy;
-import com.pgrabarczyk.proxy.provider.service.exception.WebpageContentServiceException;
+import com.pgrabarczyk.proxy.provider.service.exception.DownloadWebPageServiceException;
 
 @Service
 public class UpdatedProxyProviderService {
@@ -24,7 +24,7 @@ public class UpdatedProxyProviderService {
 
 	private LocalDateTime lastDownloaded = LocalDateTime.of(1970, 1, 1, 1, 1);
 
-	public synchronized Set<ProvidedProxy> getProxies() throws WebpageContentServiceException {
+	public synchronized Set<ProvidedProxy> getProxies() throws DownloadWebPageServiceException {
 		if (null == proxies) {
 			updateProxies();
 			return proxies;
@@ -38,7 +38,7 @@ public class UpdatedProxyProviderService {
 		return proxies;
 	}
 
-	public synchronized void updateProxies() throws WebpageContentServiceException {
+	public synchronized void updateProxies() throws DownloadWebPageServiceException {
 		proxies = proxyProviderService.getProxies();
 		lastDownloaded = LocalDateTime.now();
 	}

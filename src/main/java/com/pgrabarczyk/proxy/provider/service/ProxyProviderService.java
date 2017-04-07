@@ -14,7 +14,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.pgrabarczyk.proxy.provider.factory.ProvidedProxyFactory;
 import com.pgrabarczyk.proxy.provider.model.ProvidedProxy;
-import com.pgrabarczyk.proxy.provider.service.exception.WebpageContentServiceException;
+import com.pgrabarczyk.proxy.provider.service.exception.DownloadWebPageServiceException;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class ProxyProviderService {
 	private Set<String> urlsToParse;
 
 	@Autowired
-	private WebpageContentService webpageContentService;
+	private DownloadWebPageService webpageContentService;
 
 	@Autowired
 	private ProvidedProxyFactory providedProxyFactory;
@@ -38,9 +38,9 @@ public class ProxyProviderService {
 	 * often. Once per 5minutes should be ok.
 	 * 
 	 * @return
-	 * @throws WebpageContentServiceException
+	 * @throws DownloadWebPageServiceException
 	 */
-	public Set<ProvidedProxy> getProxies() throws WebpageContentServiceException {
+	public Set<ProvidedProxy> getProxies() throws DownloadWebPageServiceException {
 		log.debug("Searching for proxies");
 		Set<ProvidedProxy> result = new HashSet<>();
 
@@ -51,7 +51,7 @@ public class ProxyProviderService {
 		return result;
 	}
 
-	private Set<ProvidedProxy> getProxies(String endPointUrl) throws WebpageContentServiceException {
+	private Set<ProvidedProxy> getProxies(String endPointUrl) throws DownloadWebPageServiceException {
 		Set<ProvidedProxy> result = new HashSet<>();
 		HtmlPage htmlPage = webpageContentService.getPageContent(endPointUrl, Collections.emptyMap(),
 				Collections.emptySet());

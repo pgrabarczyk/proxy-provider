@@ -10,17 +10,17 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
-import com.pgrabarczyk.proxy.provider.service.exception.WebpageContentServiceException;
+import com.pgrabarczyk.proxy.provider.service.exception.DownloadWebPageServiceException;
 
 public class WebpageContentServiceTest {
 
 	@Test
-	public void shouldGetPageContent() throws WebpageContentServiceException {
+	public void shouldGetPageContent() throws DownloadWebPageServiceException {
 		// given
 		final String endPointUrl = "http://www.wp.pl/";
 		Map<String, String> headers = new HashMap<>();
 		Set<Cookie> cookies = new HashSet<>();
-		WebpageContentService webpageContentService = new WebpageContentService();
+		DownloadWebPageService webpageContentService = new DownloadWebPageService();
 
 		// when
 		HtmlPage pageContent = webpageContentService.getPageContent(endPointUrl, headers, cookies);
@@ -29,13 +29,13 @@ public class WebpageContentServiceTest {
 		Assert.assertTrue(pageContent.asXml().contains("Sport"));
 	}
 
-	@Test(expected = WebpageContentServiceException.class)
-	public void shouldNotFindSuchPage() throws WebpageContentServiceException {
+	@Test(expected = DownloadWebPageServiceException.class)
+	public void shouldNotFindSuchPage() throws DownloadWebPageServiceException {
 		// given
 		final String endPointUrl = "http://sdfdsfsddfsfdsfdsfsdfsdfsdfsdsfdsdffsdfsdfdssfsdfsfdsfd.sdfsdfsdfdffsd/";
 		Map<String, String> headers = new HashMap<>();
 		Set<Cookie> cookies = new HashSet<>();
-		WebpageContentService webpageContentService = new WebpageContentService();
+		DownloadWebPageService webpageContentService = new DownloadWebPageService();
 
 		// when
 		webpageContentService.getPageContent(endPointUrl, headers, cookies);
