@@ -2,4 +2,4 @@
 Proivider of proxy
 
 Use ProxyProviderService.getProxies() for Set of proxies.
-Use UpdatedProxyProviderService.getProxies() for optimal usage of ProxyProviderService. It will update proxies when they should be updated.
+Use UpdatedProxyProviderService for optimal usage of ProxyProviderService. It will automaticly update proxies or let you know when time has come for new set of proxies.

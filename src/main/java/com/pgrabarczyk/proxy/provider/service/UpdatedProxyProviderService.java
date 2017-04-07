@@ -30,8 +30,7 @@ public class UpdatedProxyProviderService {
 			return proxies;
 		}
 
-		LocalDateTime dateTimeMillisAgo = LocalDateTime.now().minus(refreshDelayInMilliseconds, ChronoUnit.MILLIS);
-		if (dateTimeMillisAgo.isBefore(dateTimeMillisAgo)) {
+		if (shouldBeUpdated()) {
 			updateProxies();
 			return proxies;
 		}
@@ -39,9 +38,14 @@ public class UpdatedProxyProviderService {
 		return proxies;
 	}
 
-	private synchronized void updateProxies() throws WebpageContentServiceException {
+	public synchronized void updateProxies() throws WebpageContentServiceException {
 		proxies = proxyProviderService.getProxies();
 		lastDownloaded = LocalDateTime.now();
+	}
+	
+	public synchronized boolean shouldBeUpdated() {
+		LocalDateTime dateTimeMillisAgo = LocalDateTime.now().minus(refreshDelayInMilliseconds, ChronoUnit.MILLIS);
+		return dateTimeMillisAgo.isBefore(dateTimeMillisAgo);
 	}
 
 }
