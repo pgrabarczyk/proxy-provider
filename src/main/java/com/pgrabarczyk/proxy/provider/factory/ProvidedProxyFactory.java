@@ -3,12 +3,9 @@ package com.pgrabarczyk.proxy.provider.factory;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
-import org.springframework.stereotype.Component;
-
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.pgrabarczyk.proxy.provider.model.ProvidedProxy;
 
-@Component
 public class ProvidedProxyFactory {
 
 	public ProvidedProxy create(HtmlElement htmlElement) {

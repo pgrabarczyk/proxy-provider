@@ -8,7 +8,7 @@ Add dependency:
 <dependency>
 	<groupId>com.pgrabarczyk</groupId>
 	<artifactId>proxy-provider</artifactId>
-	<version>1.0.1</version>
+	<version>2.0.0</version>
 </dependency>
 ```
 Add repository:
@@ -20,12 +20,16 @@ Add repository:
 </repository>
 ```
 
-### Spring - Import configuration
-For correct use spring configuration bean need to be added.
+### Usage:
+(recomended) synchronized methods of ProxyUpdatableContainer:
+- getFirst()
+- getProxies()
 ```
-<bean id="proxyProviderAppConf" class="com.pgrabarczyk.proxy.provider.AppConf"/>
+Return Optional(ProvidedProxy) or Set<ProvidedProxy> (could be empty). If proxies are too old then it will update set and return fresh one.
+```
+- remove(ProvidedProxy p);
+```
+Remove just remove proxy from set
 ```
 
-### Usage:
-Use ProxyProviderService.getProxies() for Set of proxies.
-Use UpdatedProxyProviderService for optimal usage of ProxyProviderService. It will automaticly update proxies or let you know when time has come for new set of proxies.
+(optional) ProxyProviderService.getProxies() will always try to download new Set of proxies.

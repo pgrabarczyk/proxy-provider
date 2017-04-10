@@ -4,25 +4,17 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pgrabarczyk.proxy.provider.AppConf;
 import com.pgrabarczyk.proxy.provider.model.ProvidedProxy;
 import com.pgrabarczyk.proxy.provider.service.exception.DownloadWebPageServiceException;
+import com.pgrabarczyk.proxy.provider.service.exception.ProxyProviderServiceException;
 
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
-@ContextConfiguration(classes = AppConf.class)
-@RunWith(SpringJUnit4ClassRunner.class)
 @Slf4j
-public class ProxyProviderServiceIT {
+public class ProxyProviderServiceTest {
 
-	@Autowired
-	private ProxyProviderService proxyProviderService;
+	private ProxyProviderService proxyProviderService = new ProxyProviderService();
 
 	@Test
 	public void checkSplitOfUrlsToParseTest() {
@@ -35,7 +27,7 @@ public class ProxyProviderServiceIT {
 	}
 
 	@Test
-	public void getProxiesTest() throws DownloadWebPageServiceException {
+	public void getProxiesTest() throws DownloadWebPageServiceException, ProxyProviderServiceException {
 		// given
 		// when
 		final Set<ProvidedProxy> proxies = proxyProviderService.getProxies();
