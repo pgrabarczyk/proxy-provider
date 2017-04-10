@@ -13,8 +13,12 @@ import com.pgrabarczyk.proxy.provider.AppConf;
 import com.pgrabarczyk.proxy.provider.model.ProvidedProxy;
 import com.pgrabarczyk.proxy.provider.service.exception.DownloadWebPageServiceException;
 
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
+
 @ContextConfiguration(classes = AppConf.class)
 @RunWith(SpringJUnit4ClassRunner.class)
+@Slf4j
 public class ProxyProviderServiceIT {
 
 	@Autowired
@@ -36,6 +40,7 @@ public class ProxyProviderServiceIT {
 		// when
 		final Set<ProvidedProxy> proxies = proxyProviderService.getProxies();
 		// then
+		log.debug(proxies.toString());
 		Assert.assertNotNull(proxies);
 		Assert.assertFalse(proxies.isEmpty());
 	}
