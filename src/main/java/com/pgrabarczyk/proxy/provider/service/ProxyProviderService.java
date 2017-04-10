@@ -42,25 +42,26 @@ public class ProxyProviderService {
 	 * @throws ProxyProviderServiceException
 	 */
 	public Set<ProvidedProxy> getProxies() throws ProxyProviderServiceException {
-		log.debug("Searching for proxies");
-		Set<ProvidedProxy> result = new HashSet<>();
-
-		for (String url : urlsToParse) {
-			result.addAll(getProxies(url));
-		}
-		log.debug("Found {} proxies", result.size());
-		return result;
-	}
-
-	private Set<ProvidedProxy> getProxies(String endPointUrl) throws ProxyProviderServiceException {
-		Set<ProvidedProxy> result = new HashSet<>();
-		HtmlPage htmlPage;
 		try {
-			htmlPage = webpageContentService.getPageContent(endPointUrl, Collections.emptyMap(),
-					Collections.emptySet());
-		} catch (DownloadWebPageServiceException ex) {
+			log.debug("Searching for proxies");
+
+			Set<ProvidedProxy> result = new HashSet<>();
+
+			for (String url : urlsToParse) {
+				result.addAll(getProxies(url));
+			}
+			log.debug("Found {} proxies", result.size());
+			return result;
+		} catch (Exception ex) {
 			throw new ProxyProviderServiceException(ex);
 		}
+
+	}
+
+	private Set<ProvidedProxy> getProxies(String endPointUrl) throws DownloadWebPageServiceException {
+		Set<ProvidedProxy> result = new HashSet<>();
+		HtmlPage htmlPage = webpageContentService.getPageContent(endPointUrl, Collections.emptyMap(),
+				Collections.emptySet());
 
 		final DomElement table = htmlPage.getElementById("tblproxy");
 		final DomNodeList<HtmlElement> tbodyElements = table.getElementsByTagName("tr");
