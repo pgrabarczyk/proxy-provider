@@ -1,6 +1,6 @@
 # proxy-provider
 
-
+Provider of Anonymous and Elite proxies.
 
 ### Maven - Import project
 Add dependency:
