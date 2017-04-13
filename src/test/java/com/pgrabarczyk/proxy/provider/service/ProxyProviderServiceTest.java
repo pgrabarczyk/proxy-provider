@@ -14,14 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ProxyProviderServiceTest {
 
-	private ProxyProviderService proxyProviderService = new ProxyProviderService();
-
 	@Test
 	public void getProxiesTest() throws DownloadWebPageServiceException, ProxyProviderServiceException {
 		// given
 		final int maxResults = 33;
+		ProxyProviderService proxyProviderService = new ProxyProviderService();
+		proxyProviderService.setMaxResults(maxResults);
 		// when
-		final Set<ProvidedProxy> proxies = proxyProviderService.getProxies(maxResults);
+		final Set<ProvidedProxy> proxies = proxyProviderService.getProxies();
 		// then
 		log.debug(proxies.toString());
 		Assert.assertNotNull(proxies);

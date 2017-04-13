@@ -36,7 +36,6 @@ Remove just remove proxy from set
 
 #### ProxyProviderService
 ```
-getProxies(int maxResult)
 getProxies()
 ```
 methods will always try to download new Set of proxies.

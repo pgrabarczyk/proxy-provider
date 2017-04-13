@@ -22,21 +22,23 @@ import com.pgrabarczyk.proxy.provider.model.ProvidedProxy;
 import com.pgrabarczyk.proxy.provider.service.exception.DownloadWebPageServiceException;
 import com.pgrabarczyk.proxy.provider.service.exception.ProxyProviderServiceException;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Slf4j
 public class ProxyProviderService {
 
 	private String urlFormat = "http://www.gatherproxy.com/proxylist/anonymity/?t=%s";
 	private String bodyRequestFormat = "Type=%s&PageIdx=%d&Uptime=%d";
+	@Setter
 	private DownloadWebPageService webpageContentService = new DownloadWebPageService();
 	private ProvidedProxyFactory providedProxyFactory = new ProvidedProxyFactory();
+	@Setter
+	private int maxResults = Constants.DEFAULT_MAX_PROXIES;
 
 	/**
 	 * Download and parse Anonymous and Elite proxies. Result should be max
@@ -46,18 +48,7 @@ public class ProxyProviderService {
 	 * @return Set of ProvidedProxy
 	 * @throws ProxyProviderServiceException
 	 */
-	public Set<ProvidedProxy> getProxies() throws ProxyProviderServiceException {
-		return this.getProxies(Constants.DEFAULT_MAX_PROXIES);
-	}
-
-	/**
-	 * Download and parse Anonymous and Elite proxies.
-	 * 
-	 * @param maxResults
-	 * @return Set of ProvidedProxy
-	 * @throws ProxyProviderServiceException
-	 */
-	public Set<ProvidedProxy> getProxies(int maxResults) throws ProxyProviderServiceException {
+	public Set<ProvidedProxy> getProxies() throws ProxyProviderServiceException {	
 
 		try {
 			log.debug("Searching for proxies");
@@ -131,5 +122,7 @@ public class ProxyProviderService {
 
 		return result;
 	}
+
+
 
 }

@@ -13,22 +13,15 @@ import com.pgrabarczyk.proxy.provider.service.exception.ProxyProviderServiceExce
 
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
 
 @NoArgsConstructor
 public class ProxyUpdatableContainer {
 
-	public ProxyUpdatableContainer(int updateProxyTimeMilliseconds) {
-		super();
-		this.updateProxyTimeMilliseconds = updateProxyTimeMilliseconds;
-	}
-
-	public ProxyUpdatableContainer(int updateProxyTimeMilliseconds, ProxyProviderService proxyProviderService) {
-		this(updateProxyTimeMilliseconds);
-		this.proxyProviderService = proxyProviderService;
-	}
-
+	@Setter
 	private int updateProxyTimeMilliseconds = Constants.DEFAULT_UPDATE_PROXY_TIME_MILLISECONDS;
 
+	@Setter
 	private ProxyProviderService proxyProviderService = new ProxyProviderService();
 
 	private Set<ProvidedProxy> proxies = new HashSet<>();
