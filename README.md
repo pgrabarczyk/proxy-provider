@@ -8,7 +8,7 @@ Add dependency:
 <dependency>
 	<groupId>com.pgrabarczyk</groupId>
 	<artifactId>proxy-provider</artifactId>
-	<version>2.0.0</version>
+	<version>2.1.0</version>
 </dependency>
 ```
 Add repository:
@@ -21,7 +21,9 @@ Add repository:
 ```
 
 ### Usage:
-(recomended) synchronized methods of ProxyUpdatableContainer:
+
+#### ProxyUpdatableContainer
+synchronized methods of ProxyUpdatableContainer:
 - getFirst()
 - getProxies()
 ```
@@ -32,4 +34,10 @@ Return Optional(ProvidedProxy) or Set<ProvidedProxy> (could be empty). If proxie
 Remove just remove proxy from set
 ```
 
-(optional) ProxyProviderService.getProxies() will always try to download new Set of proxies.
+#### ProxyProviderService
+```
+getProxies(int maxResult)
+getProxies()
+```
+methods will always try to download new Set of proxies.
+Remember that it can take some time to download and parse much proxies.

@@ -1,7 +1,5 @@
 package com.pgrabarczyk.proxy.provider.model;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,8 +17,6 @@ public class ProvidedProxy {
 
 	private String ip;
 	private int port;
-	private LocalDateTime dateTime;
 	private String type;
-	private int responseTime;
 
 }

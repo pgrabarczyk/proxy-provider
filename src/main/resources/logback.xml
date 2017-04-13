@@ -7,7 +7,7 @@
 		</encoder>
 	</appender>
 
-    <logger name="com.pgrabarczyk.proxy.provider" level="debug" additivity="false">
+    <logger name="com.pgrabarczyk.proxy.provider" level="trace" additivity="false">
         <appender-ref ref="console"/>
     </logger>
     

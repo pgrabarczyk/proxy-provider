@@ -7,6 +7,7 @@ import java.util.Set;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.pgrabarczyk.proxy.provider.Constants;
@@ -22,24 +23,23 @@ public class DownloadWebPageService {
 
 	private long timeoutMillis = Constants.DEFAULT_WEB_PAGE_CONTENT_WAIT_MILLISECONDS;
 
-	public HtmlPage getPageContent(@NonNull String endPointUrl, @NonNull Map<String, String> headers,
+	public HtmlPage getPageContent(@NonNull WebRequest webRequest, @NonNull Map<String, String> headers,
 			Set<Cookie> cookies) throws DownloadWebPageServiceException {
 
 		try {
-			return getPage(endPointUrl, headers, cookies);
+			return getPage(webRequest, headers, cookies);
 		} catch (FailingHttpStatusCodeException | IOException e) {
 			throw new DownloadWebPageServiceException(e);
 		}
 
 	}
 
-	private HtmlPage getPage(@NonNull String endPointUrl, @NonNull Map<String, String> headers, Set<Cookie> cookies)
+	private HtmlPage getPage(@NonNull WebRequest webRequest, @NonNull Map<String, String> headers, Set<Cookie> cookies)
 			throws IOException {
 		WebClient webClient = new WebClient();
-
 		webClient.setAjaxController(new NicelyResynchronizingAjaxController());
 		webClient.getCookieManager().setCookiesEnabled(true);
-
+		
 		if (null != cookies) {
 			for (Cookie cookie : cookies) {
 				webClient.getCookieManager().addCookie(cookie);
@@ -56,7 +56,8 @@ public class DownloadWebPageService {
 
 		webClient.waitForBackgroundJavaScript(timeoutMillis);
 		webClient.waitForBackgroundJavaScriptStartingBefore(timeoutMillis);
-		return webClient.getPage(endPointUrl);
+		
+		return webClient.getPage(webRequest);
 	}
 
 }

@@ -17,24 +17,16 @@ public class ProxyProviderServiceTest {
 	private ProxyProviderService proxyProviderService = new ProxyProviderService();
 
 	@Test
-	public void checkSplitOfUrlsToParseTest() {
-		// given
-		// when
-		final Set<String> urlsToParse = proxyProviderService.getUrlsToParse();
-		// then
-		Assert.assertNotNull(urlsToParse);
-		Assert.assertFalse(urlsToParse.isEmpty());
-	}
-
-	@Test
 	public void getProxiesTest() throws DownloadWebPageServiceException, ProxyProviderServiceException {
 		// given
+		final int maxResults = 33;
 		// when
-		final Set<ProvidedProxy> proxies = proxyProviderService.getProxies();
+		final Set<ProvidedProxy> proxies = proxyProviderService.getProxies(maxResults);
 		// then
 		log.debug(proxies.toString());
 		Assert.assertNotNull(proxies);
 		Assert.assertFalse(proxies.isEmpty());
+		Assert.assertTrue(proxies.size() <= maxResults);
 	}
 
 }
