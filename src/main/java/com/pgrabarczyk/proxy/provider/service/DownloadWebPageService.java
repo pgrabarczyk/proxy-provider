@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -36,7 +37,7 @@ public class DownloadWebPageService {
 
 	private HtmlPage getPage(@NonNull WebRequest webRequest, @NonNull Map<String, String> headers, Set<Cookie> cookies)
 			throws IOException {
-		WebClient webClient = new WebClient();
+		WebClient webClient = new WebClient(BrowserVersion.CHROME);
 		webClient.setAjaxController(new NicelyResynchronizingAjaxController());
 		webClient.getCookieManager().setCookiesEnabled(true);
 		
